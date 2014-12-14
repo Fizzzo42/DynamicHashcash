@@ -1,0 +1,11 @@
+{
+  "name": "DynamicHashcashServer",
+  "version": "1.0.0",
+  "description": "Server which only allows users which verify with a valid generated hash",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
