@@ -1,13 +1,19 @@
 var express = require('express');
+var sha256 = require('sha256')
 var app = express();
+
+var difficulty = 5;
 
 //Express-Middleware (executed on every Request)
 app.use(function (req, res, next) {
-	res.header('challenge', 12345);
-	if(req.header('solution') == 12345)
-		next();
-	else
-		res.end("Not authorized!");
+	var challenge = Math.random().toString(36).substring(7);
+	res.header('challenge', challenge);
+	res.header('difficulty', difficulty);
+	if(req.header('solution'))
+		if(sha256(challenge) == req.header('solution'))
+			next();
+
+	res.end("Not authorized!");
 });
 
 app.get('/', function(req, res){
