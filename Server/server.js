@@ -13,7 +13,8 @@ app.use(function (req, res, next) {
 		var startString = "";
 		for(var i = 0; i < difficulty; i++)
 			startString += "0";
-		if(indexOf(sha256(challenge + req.header('solution'))) == 0)
+		var result = sha256(challenge + req.header('solution'));
+		if(result.indexOf(startString) == 0)
 			next();
 	}
 
