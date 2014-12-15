@@ -9,9 +9,13 @@ app.use(function (req, res, next) {
 	var challenge = Math.random().toString(36).substring(7);
 	res.header('challenge', challenge);
 	res.header('difficulty', difficulty);
-	if(req.header('solution'))
-		if(sha256(challenge) == req.header('solution'))
+	if(req.header('solution')){
+		var startString = "";
+		for(var i = 0; i < difficulty; i++)
+			startString += "0";
+		if(indexOf(sha256(challenge + req.header('solution'))) == 0)
 			next();
+	}
 
 	res.end("Not authorized!");
 });
